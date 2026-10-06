@@ -24,7 +24,7 @@ A hashmap implemented from scratch in JavaScript, using separate chaining (linke
 
 Clone the repo and install dependencies:
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/OverlordGummyBear/hashmap.git
 cd hashmap
 npm install
 ```
