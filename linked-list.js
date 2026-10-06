@@ -96,6 +96,43 @@ class LinkedList{
         return oldHead.value;
     }
 
+    replaceValue(key, value){
+        if(this._head === null) return false;
+
+        let isFound = false;
+        let current = this._head;
+
+        while(current !== null){
+            if(current.key === key){
+                isFound = true;
+                current.value = value;
+                break;
+            }
+
+            current = current.nextNode;
+        }
+
+        return isFound;
+    }
+
+    get(key){
+        if(this._head === null) return undefined;
+
+        let current = this._head;
+        let item = undefined;
+
+        while(current !== null){
+            if(current.key === key){
+                item = current.value;
+                break;
+            }
+
+            current = current.nextNode;
+        }
+
+        return item;
+    }
+
     contains(key){
         if(this._head === null) return false;
 
