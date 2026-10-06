@@ -9,6 +9,7 @@ class HashMap{
     constructor(){
         this.#_buckets = new Array(16);
         this.buckets = this.#_buckets
+
         for(let i = 0; i < this.#_capacity; i++){
             this.#_buckets[i] = null; //new LinkedList();
         }
@@ -47,7 +48,6 @@ class HashMap{
             throw new Error("Trying to access index out of bounds");
         }
 
-
         if(this.#_buckets[index] === null){
             this.#_buckets[index] = new LinkedList();
             this.#_buckets[index].append(key, value);
@@ -71,10 +71,88 @@ class HashMap{
         return this.#_buckets[index] === null ? undefined : this.#_buckets[index].get(key);
     }
 
+    has(key){
+        const index = this.#hash(key);
+
+        if (index < 0 || index >= this.#_buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+
+        return this.#_buckets[index] === null ? false : this.#_buckets[index].contains(key);
+    }
+
+    remove(key){
+        const index = this.#hash(key);
+
+        if (index < 0 || index >= this.#_buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+
+        if(this.#_buckets[index] === null){
+            return false;
+        } 
+
+        if(this.#_buckets[index].contains(key)){
+            this.#_buckets[index].remove(key);
+            this.#_numberEntries--;
+
+            return true;
+        }
+
+        return false;
+    }
+
     length(){ 
         return this.#_numberEntries;
     }
 
+    clear(){
+        for(let i = 0; i < this.#_capacity; i++){
+            this.#_buckets[i] = null;
+        }
+
+        this.#_numberEntries = 0;
+    }
+
+    keys(){
+        let keys = []
+
+        this.#_buckets.forEach((bucket) => {
+            if(bucket !== null){
+                keys = [...keys, ...bucket.entries()]
+            }
+        });
+
+        keys = keys.map((entry) => entry[0]);
+
+        return keys;
+    }
+
+    values(){
+        let values = []
+
+        this.#_buckets.forEach((bucket) => {
+            if(bucket !== null){
+                values = [...values, ...bucket.entries()]
+            }
+        });
+
+        values = values.map((entry) => entry[1]);
+
+        return values;
+    }
+
+    entries(){
+        let entries = []
+
+        this.#_buckets.forEach((bucket) => {
+            if(bucket !== null){
+                entries = [...entries, ...bucket.entries()]
+            }
+        });
+
+        return entries;
+    }
 }
 
 export default HashMap;

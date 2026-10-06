@@ -25,75 +25,28 @@ class LinkedList{
         }
     }
 
-    prepend(value){
-        const newLink = new Node(key, value);
-
-        if(this._head === null && this._tail === null){
-            this._tail = newLink;
-            this._head = newLink;
-        } else{
-            const oldTail = this._tail;
-            oldTail.nextNode = newLink;
-            this._tail = newLink;
-        }
-    }
-
-    size(){
-        if(this._head === null) return 0;
-
-        let size = 1;
+    remove(key){
         let current = this._head;
-
-        while(current.nextNode !== null){
-            size++;
-            current = current.nextNode;
-        }
-
-        return size;
-    }
-
-    head(){
-        if(this._head === null) return undefined;
-
-        return this._head.value;
-    }
-
-    tail(){
-        if(this._tail === null) return undefined;
-        
-        return this._tail.value;
-    }
-
-    at(index){
-        if(this._head === null) return undefined;
-
-        let current = this._head;
-        let nodeIndex = 0;
+        let previous = null;
 
         while(current !== null){
-            if(nodeIndex === index)
-                return current.key;
+            if(current.key === key){
+                if(previous !== null){
+                    previous.nextNode = current.nextNode;   
+                } else {
+                    this._head = current.nextNode;
+                }
 
-            nodeIndex++;
+                current.nextNode = null;
+
+                return true;
+            }
+
+            previous = current;
             current = current.nextNode;
         }
 
-        return undefined;
-    }
-
-    pop(){
-        if(this._head === null) return undefined;
-
-        let oldHead = this._head;
-
-        if(this._head === this._tail){
-            this._head = null;
-            this._tail = null;
-        } else {
-            this._head = oldHead.nextNode;
-        }
-     
-        return oldHead.value;
+        return false;
     }
 
     replaceValue(key, value){
@@ -151,19 +104,19 @@ class LinkedList{
         return isFound;
     }
 
-    findIndex(key){
-        let index = 0;
+    entries(){
+        if(this._head === null) return [];
+
         let current = this._head;
+        let entriesArr = []
 
         while(current !== null){
-            if(current.key === key)
-                return index;
+            entriesArr.push([current.key, current.value]);
 
-            index++;
             current = current.nextNode;
         }
 
-        return -1;
+        return entriesArr;
     }
 
     toString(){

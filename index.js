@@ -11,7 +11,14 @@ list.append("daniel", "26");
 
 map.set("daniel", 26)
 map.set("Daniel", 186)
+map.set("Anna", 183)
 
 console.log(map.get("daniel"));
 console.log(map.get("Daniel"));
-//console.log(map.length());
+console.log(map.entries())
+console.log(map.length());
+
+map.remove("Daniel");
+
+console.log(map.entries())
+console.log(map.length());
