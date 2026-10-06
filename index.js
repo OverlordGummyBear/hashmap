@@ -1,24 +1,26 @@
 import HashMap from "./hashmap.js";
-import LinkedList from "./linked-list.js";
 
-let map = new HashMap();
-let list = new LinkedList();
-list.append("daniel", "26");
+const test = new HashMap();
 
-//console.log(list.toString());
-//console.log(list.replaceValue("Daniel", 186))
-//console.log(list.toString());
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
 
-map.set("daniel", 26)
-map.set("Daniel", 186)
-map.set("Anna", 183)
+console.log("number of buckets: " + test.getBuckets().length)
+console.log(test.getBuckets())
+test.set('lion', 'blue')
+test.set('elephant', 'tall')
 
-console.log(map.get("daniel"));
-console.log(map.get("Daniel"));
-console.log(map.entries())
-console.log(map.length());
+test.set('moon', 'silver')
 
-map.remove("Daniel");
-
-console.log(map.entries())
-console.log(map.length());
+console.log("number of buckets: " + test.getBuckets().length)
+console.log(test.getBuckets())
