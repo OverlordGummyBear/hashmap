@@ -1,5 +1,6 @@
 class Node {
-    constructor(value = null) {
+    constructor(key = null, value = null) {
+        this.key = key;
         this.value = value;
         this.nextNode = null;
     }
@@ -11,8 +12,8 @@ class LinkedList{
         this._tail = null;
     }   
 
-    append(value){
-        const newLink = new Node(value);
+    append(key, value){
+        const newLink = new Node(key, value);
             
         if(this._head === null && this._tail === null){
             this._tail = newLink;
@@ -25,7 +26,7 @@ class LinkedList{
     }
 
     prepend(value){
-        const newLink = new Node(value);
+        const newLink = new Node(key, value);
 
         if(this._head === null && this._tail === null){
             this._tail = newLink;
@@ -71,7 +72,7 @@ class LinkedList{
 
         while(current !== null){
             if(nodeIndex === index)
-                return current.value;
+                return current.key;
 
             nodeIndex++;
             current = current.nextNode;
@@ -95,14 +96,14 @@ class LinkedList{
         return oldHead.value;
     }
 
-    contains(value){
+    contains(key){
         if(this._head === null) return false;
 
         let isFound = false;
         let current = this._head;
 
         while(current !== null){
-            if(current.value === value){
+            if(current.key === key){
                 isFound = true;
                 break;
             }
@@ -113,12 +114,12 @@ class LinkedList{
         return isFound;
     }
 
-    findIndex(value){
+    findIndex(key){
         let index = 0;
         let current = this._head;
 
         while(current !== null){
-            if(current.value === value)
+            if(current.key === key)
                 return index;
 
             index++;
